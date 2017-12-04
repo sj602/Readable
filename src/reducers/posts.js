@@ -1,6 +1,12 @@
+import {
+  GET_CATEGORIES,
+  GET_COMMENTS_BY_POST,
+  GET_POSTS_BY_CATEGORY,
+} from '../actions/types';
 
 export default function posts(state = {}, action) {
-  return {
-
+  switch(action.type) {
+    default:
+      return state
   }
 }
