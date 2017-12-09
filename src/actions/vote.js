@@ -11,7 +11,7 @@ export const voteAction = (id, score) => {
   }
 }
 
-export const vote = (id, option, type) => (dispatch) => {
+export const voteDispatch = (id, option, type) => (dispatch) => {
   return api.vote(id, option, type)
-    .then(data => dispatch(vote(id, data.voteScore)))
+    .then( data => dispatch(voteAction(id, data.voteScore)) )
 }

@@ -1,5 +1,5 @@
 import {
-  VOTE,
+  VOTE
 } from '../actions/types';
 
 export default function vote(state = {}, action) {
@@ -9,7 +9,7 @@ export default function vote(state = {}, action) {
         ...state,
         [action.id]: action.score
       }
-    
+
     default:
       return state
   }

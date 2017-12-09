@@ -1,6 +1,8 @@
 const url = 'http://localhost:3001';
 const KEY = 'KEY';
 const headers = {
+  'Accept': 'application/json',
+  'Content-Type': 'application/json',
   'Authorization': KEY
 };
 
@@ -70,7 +72,6 @@ export const vote = (id, option, type) => {
   const voteData = {id, option};
 
   if(type === 'post'){
-    console.log('post!')
     return fetch(
       `${url}/posts/${id}`,
       {

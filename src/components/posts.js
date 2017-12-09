@@ -28,7 +28,6 @@ class Posts extends Component {
 
     if(posts) {
       return posts.map((post) => {
-        console.log(post)
         return (
             <li key={post.id}>
               <Link to='{post.category}/{post.id}'>
@@ -36,7 +35,7 @@ class Posts extends Component {
               </Link>
               <p> by {post.author}</p>
               <p> Comments: {post.commentCount}</p>
-              <Vote value={post}/>
+              <Vote value={post} />
             </li>
         )
       })
