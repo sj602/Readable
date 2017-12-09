@@ -1,11 +1,26 @@
-import { GET_CATEGORIES } from './categories';
-import { GET_POSTS_BY_CATEGORY } from './posts';
-import { GET_COMMENTS_BY_POST } from './comments';
+import {
+  GET_COMMENTS_BY_POST,
+  GET_ALL_POSTS,
+  GET_POSTS_BY_CATEGORY,
+} from './types';
+import * as api from '../helpers/api';
 
-export default function getPostsByCategory() {
+export const getPostsByCategory = (posts, category) => {
   return {
     type: GET_POSTS_BY_CATEGORY,
     posts,
     category
   }
 }
+
+export const getAllPosts = (posts) => {
+  return {
+    type: GET_ALL_POSTS,
+    posts,
+  }
+}
+
+export const fetchPosts = () => (dispatch) => {
+  return api.getAllPosts()
+    .then((posts) => dispatch(getAllPosts(posts)))
+};

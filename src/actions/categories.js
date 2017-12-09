@@ -1,10 +1,18 @@
-import { GET_CATEGORIES } from './categories';
-import { GET_POSTS_BY_CATEGORY } from './posts';
-import { GET_COMMENTS_BY_POST } from './comments';
+import {
+  GET_CATEGORIES,
+  GET_POSTS_BY_CATEGORY,
+  GET_COMMENTS_BY_POST
+} from './types';
+import * as api from '../helpers/api';
 
-export default function getCategories() {
+export const getCategories = (categories) => {
   return {
     type: GET_CATEGORIES,
-    categories,
+    categories
   }
-}
+};
+
+export const fetchCategories = () => (dispatch) => {
+  return api.getCategories()
+    .then((categories) => dispatch(getCategories(categories)))
+};
