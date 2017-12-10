@@ -2,6 +2,8 @@ import {
   GET_COMMENTS_BY_POST,
   GET_ALL_POSTS,
   GET_POSTS_BY_CATEGORY,
+  ADD_POST,
+  GET_POST
 } from './types';
 import * as api from '../helpers/api';
 
@@ -24,3 +26,27 @@ export const fetchPosts = () => (dispatch) => {
   return api.getAllPosts()
     .then((posts) => dispatch(getAllPosts(posts)))
 };
+
+export const addPostAction = (post) => {
+  return {
+    type: ADD_POST,
+    post,
+  }
+}
+
+export const addPost = () => (dispatch) => {
+  return api.addPost()
+    .then(post => dispatch(addPostAction(post)))
+}
+
+export const getPostAction = (post) => {
+  return {
+    type: GET_POST,
+    post
+  }
+}
+
+export const getPost = (id) => (dispatch) => {
+  return api.getPost(id)
+    .then(post => dispatch(getPostAction(post)))
+}

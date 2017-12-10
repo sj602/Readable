@@ -6,31 +6,14 @@ import Header from './header';
 import Posts from './posts';
 
 class Main extends Component {
-  // state = {
-  //
-  // }
-
-  // componentDidMount() {
-  //   // const categories = getAll();
-  //   // console.log(categories);
-  //   return api.getCategories();
-  // }
-
   render() {
     return (
-      <div>
+      <div className='container'>
         <Header />
         <Posts />
-        this is main page
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    categories: state.categories,
-  }
-};
-
-export default connect(mapStateToProps, {fetchCategories})(Main);
+export default Main;

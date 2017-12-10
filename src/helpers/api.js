@@ -15,6 +15,7 @@ export const getCategories = () => {
     }
   )
   .then(response => response.json())
+  .then(data => data.categories)
   .then(data => data)
 };
 
@@ -46,6 +47,18 @@ export const addPost = () => {
     `${url}/posts`,
     {
       method: 'POST',
+      headers
+    }
+  )
+  .then(response => response.json())
+  .then(data => data)
+};
+
+export const getPost = (id) => {
+  return fetch(
+    `${url}/posts/:id`,
+    {
+      method: 'GET',
       headers
     }
   )

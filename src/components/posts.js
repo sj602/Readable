@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../actions/posts';
+import {
+  fetchPosts, addPost
+} from '../actions/posts';
 import '../styles/posts.css';
 import { Link } from 'react-router-dom';
 import Vote from './vote';
+import { Button, ListGroup, ListGroupItem } from 'reactstrap';
 
 class Posts extends Component {
   state = {
     posts: [],
+    sort: false,
   }
 
   componentWillMount() {
@@ -20,6 +24,7 @@ class Posts extends Component {
 
   renderPosts() {
     const { posts } = this.state
+
     if(posts === []) {
       return (
           <p>There are no posts yet.</p>
@@ -29,23 +34,79 @@ class Posts extends Component {
     if(posts) {
       return posts.map((post) => {
         return (
-            <li key={post.id}>
-              <Link to='{post.category}/{post.id}'>
-                <h1>{post.title}</h1>
-              </Link>
-              <p> by {post.author}</p>
-              <p> Comments: {post.commentCount}</p>
-              <Vote value={post} />
-            </li>
+          <ListGroupItem key={post.id}>
+            <Link to={`/${post.category}/${post.id}`}>
+              <h3>{post.title}</h3>
+            </Link>
+            <h5> by {post.author}</h5>
+            <div className='sub-content'>
+              <h6>Comments: {post.commentCount} <Vote value={post} /></h6>
+              <div>
+                <div>
+                  <span>Edit</span>
+                </div>{'  '}
+                <div>
+                  <span>Delete</span>
+                </div>
+              </div>
+            </div>
+          </ListGroupItem>
         )
       })
+    }
+  }
+
+  sortPosts(type) {
+    switch(type){
+      case 'time':
+        return this.setState((prevState) => ({
+          posts: prevState.posts.sort((a, b) => {
+
+            if(prevState.sort === false) {
+              return a.timestamp > b.timestamp;
+            }else {
+              return a.timestamp < b.timestamp;
+            }
+
+          }),
+
+          sort: !(prevState.sort)
+        }))
+
+      case 'score':
+        return this.setState((prevState) => ({
+          posts: prevState.posts.sort((a, b) => {
+
+            if(prevState.sort === false) {
+              return a.voteScore < b.voteScore;
+            }else {
+              return a.voteScore > b.voteScore;
+            }
+
+          }),
+
+          sort: !(prevState.sort)
+        }))
+
+      default:
+        return ;
     }
   }
 
   render() {
      return (
       <div className='posts'>
-        { this.renderPosts() }
+        <div className='control-buttons'>
+          <Button onClick={() => this.sortPosts('time')}>Sort by Time</Button>{' '}
+          <Button onClick={() => this.sortPosts('score')}>Sort by Score</Button>{' '}
+          <Link to='/new'>
+            <Button>Create a Post</Button>
+          </Link>
+        </div>
+
+        <ListGroup>
+          { this.renderPosts() }
+        </ListGroup>
         <div className='post-detail'>
         </div>
       </div>
@@ -61,4 +122,5 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   fetchPosts,
+  addPost
 })(Posts);

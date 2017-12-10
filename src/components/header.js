@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchCategories } from '../actions/categories';
+import { Link } from 'react-router-dom';
 import '../styles/header.css';
+import { Nav, NavItem } from 'react-bootstrap';
 
 class Header extends Component {
   state = {
@@ -25,9 +27,13 @@ class Header extends Component {
     }
 
     if(categories) {
-      return categories.map((cat) => {
+      return categories.map((category) => {
         return (
-            <li key={cat.name}>{cat.name}</li>
+            <li key={category.name}>
+              <Link to={`/${category.path}`}>
+                {category.name}
+              </Link>
+            </li>
         )
       })
     }
@@ -36,9 +42,12 @@ class Header extends Component {
   render() {
      return (
       <div className='header'>
-        <li>ALL</li>
-        { this.renderCategories() }
-        <p>this is header</p>
+          <Link to='/'>
+            ALL
+          </Link>
+          <ul>
+            { this.renderCategories() }
+          </ul>
       </div>
     )
   }
