@@ -42,11 +42,12 @@ export const getAllPosts = () => {
   .then(data => data)
 };
 
-export const addPost = () => {
+export const addPost = (postData) => {
   return fetch(
     `${url}/posts`,
     {
       method: 'POST',
+      body: JSON.stringify(postData),
       headers
     }
   )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  fetchPosts, addPost
+  fetchPosts
 } from '../actions/posts';
 import '../styles/posts.css';
 import { Link } from 'react-router-dom';
@@ -122,5 +122,4 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   fetchPosts,
-  addPost
 })(Posts);

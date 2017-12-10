@@ -12,7 +12,6 @@ class Header extends Component {
 
   componentWillMount() {
     this.props.fetchCategories()
-      .then(data => data.categories)
       .then(data => {
         this.setState({categories: data.categories})
       })

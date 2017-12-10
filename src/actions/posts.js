@@ -34,9 +34,9 @@ export const addPostAction = (post) => {
   }
 }
 
-export const addPost = () => (dispatch) => {
-  return api.addPost()
-    .then(post => dispatch(addPostAction(post)))
+export const addPost = (postData) => (dispatch) => {
+  return api.addPost(postData)
+    .then(postData => dispatch(addPostAction(postData)))
 }
 
 export const getPostAction = (post) => {
