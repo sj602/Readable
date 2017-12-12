@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from './header';
+import Vote from './vote';
 import { getPost } from '../actions/posts';
+import { getCommentsByPost } from '../actions/comments';
 import '../styles/posts.css';
 import { Link } from 'react-router-dom';
 import {
@@ -13,23 +15,40 @@ import {
 class PostDetail extends Component {
   componentWillMount() {
     const { id } = this.props.match.params;
-    this.props.getPost(id)
+    this.props.getPost(id);
+    this.props.getCommentsByPost(id);
   }
 
   render() {
-    const { post } = this.props.posts;
-    // console.log(this.props.posts.post)
+    const { selectPost } = this.props.posts;
+    const { comments } = this.props.comments;
+
     return (
       <div className='container'>
         <Header />
-        { post && (
+        { selectPost && (
           <Card>
             <CardBody>
-              <CardTitle>{post.title}</CardTitle>
-              <CardSubtitle>written by {post.author}</CardSubtitle>
-              <CardText style={{marginTop: '30px'}}>{post.body}</CardText>
+              <CardTitle>{selectPost.title}</CardTitle>
+              <CardSubtitle>written by {selectPost.author}</CardSubtitle>
+              <CardText style={{marginTop: '30px'}}>{selectPost.body}</CardText>
             </CardBody>
-            <CardFooter>s</CardFooter>
+            { comments && comments.map(comment => {
+                return (
+                  <CardFooter className='comments' key={comment.id}>
+                    <div>
+                      {comment.author}
+                    </div>
+                    <div>
+                      {comment.body}
+                    </div>
+                    <div>
+                      <Vote value={comment} />
+                    </div>
+                  </CardFooter>
+                )
+            })
+          }
           </Card>
 
         )}
@@ -41,8 +60,10 @@ class PostDetail extends Component {
 const mapStateToProps = (state) => {
   return {
     posts: state.posts,
-    post: state.post
+    comments: state.comments
   }
 };
 
-export default connect(mapStateToProps, {getPost})(PostDetail);
+export default connect(mapStateToProps, {
+  getPost, getCommentsByPost
+})(PostDetail);

@@ -17,8 +17,8 @@ class Vote extends Component {
     return (
       <p>
         Vote Score: {score}
-        <Button onClick={() => this.vote(value.id, "upVote", 'post')}><FaThumbsOUp /></Button>
-        <Button onClick={() => this.vote(value.id, "downVote", 'post')}><FaThumbsODown /></Button>
+        <Button onClick={() => this.vote(value.id, "upVote", value)}><FaThumbsOUp /></Button>
+        <Button onClick={() => this.vote(value.id, "downVote", value)}><FaThumbsODown /></Button>
       </p>
     )
   }
