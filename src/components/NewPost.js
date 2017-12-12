@@ -5,10 +5,11 @@ import '../styles/posts.css';
 import { Link } from 'react-router-dom';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { addPost } from '../actions/posts';
+import uuid from 'uuid';
 
 class NewPost extends Component {
   state = {
-    id: '',
+    id: uuid(),
     author: '',
     category: '',
     title: '',
@@ -28,7 +29,29 @@ class NewPost extends Component {
 
   }
 
+  // validate() {
+  //   let msg = {};
+  //   if(this.state.author === '') {
+  //     msg.concat({'author required.'})
+  //   }
+  //   if(this.state.title === '') {
+  //     msg.concat({'title required.'})
+  //   }
+  //   if(this.state.body === '') {
+  //     msg.concat({'body required.'})
+  //   }
+  //   if(this.state.category === '') {
+  //     msg.concat({'category required.'})
+  //   }
+  //
+  //   if(msg === {}) {
+  //     return ;
+  //   }
+  //   return alert(msg);
+  // }
+
   handleAdd() {
+    // this.validate();
     const postData = this.state;
 
     this.props.addPost(postData)
@@ -48,12 +71,7 @@ class NewPost extends Component {
                 <Input
                   type="select" name="category"
                   value={this.state.category}
-                  onChange={(e) => {
-                    if(e.target.value === 'Select'){
-                      return alert('Select a category')
-                    }
-                    this.handleChange(e)
-                  }}>
+                  onChange={(e) => this.handleChange(e)}>
                   <option defaultValue>
                     Select
                   </option>

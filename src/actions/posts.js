@@ -3,7 +3,9 @@ import {
   GET_ALL_POSTS,
   GET_POSTS_BY_CATEGORY,
   ADD_POST,
-  GET_POST
+  GET_POST,
+  EDIT_POST,
+  DELETE_POST,
 } from './types';
 import * as api from '../helpers/api';
 
@@ -49,4 +51,28 @@ export const getPostAction = (post) => {
 export const getPost = (id) => (dispatch) => {
   return api.getPost(id)
     .then(post => dispatch(getPostAction(post)))
+}
+
+export const editPostAction = (post) => {
+  return {
+    type: EDIT_POST,
+    post
+  }
+}
+
+export const editPost = (post) => (dispatch) => {
+  return api.editPost(post.id)
+    .then(post => dispatch(editPostAction(post)))
+}
+
+export const deletePostAction = (post) => {
+  return {
+    type: DELETE_POST,
+    post
+  }
+}
+
+export const deletePost = (post) => (dispatch) => {
+  return api.deletePost(post.id)
+    .then(post => dispatch(deletePostAction(post)))
 }

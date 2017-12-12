@@ -10,21 +10,21 @@ import { Button, ListGroup, ListGroupItem } from 'reactstrap';
 
 class Posts extends Component {
   state = {
-    posts: [],
     sort: false,
   }
 
   componentWillMount() {
     this.props.fetchPosts()
       .then(data => data.posts)
-      .then(data => {
-        this.setState({ posts: data })
-      })
   }
 
-  renderPosts() {
-    const { posts } = this.state
+  // deletePost() {
+  //   this.props.deletePost()
+  // }
 
+  renderPosts() {
+    const { posts } = this.props.posts
+    console.log(posts);
     if(posts === []) {
       return (
           <p>There are no posts yet.</p>
@@ -35,7 +35,7 @@ class Posts extends Component {
       return posts.map((post) => {
         return (
           <ListGroupItem key={post.id}>
-            <Link to={`/${post.category}/${post.id}`}>
+            <Link to={`/${post.category}/${post.id}`} params={{ id: post.id }}>
               <h3>{post.title}</h3>
             </Link>
             <h5> by {post.author}</h5>
@@ -43,10 +43,9 @@ class Posts extends Component {
               <h6>Comments: {post.commentCount} <Vote value={post} /></h6>
               <div>
                 <div>
-                  <span>Edit</span>
+                  <Link to={`/edit/${post.id}`} params={{ post }}><Button>Edit</Button></Link>
                 </div>{'  '}
                 <div>
-                  <span>Delete</span>
                 </div>
               </div>
             </div>

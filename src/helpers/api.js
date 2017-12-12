@@ -57,7 +57,7 @@ export const addPost = (postData) => {
 
 export const getPost = (id) => {
   return fetch(
-    `${url}/posts/:id`,
+    `${url}/posts/${id}`,
     {
       method: 'GET',
       headers
@@ -67,6 +67,30 @@ export const getPost = (id) => {
   .then(data => data)
 };
 
+export const editPost = (post) => {
+  return fetch(
+    `${url}/posts/${post.id}`,
+    {
+      method: 'PUT',
+      body: JSON.stringify(post),
+      headers
+    }
+  )
+  .then(response => response.json())
+  .then(data => data)
+};
+
+export const deletePost = (post) => {
+  return fetch(
+    `${url}/posts/${post.id}`,
+    {
+      method: 'DELETE',
+      headers
+    }
+  )
+  .then(response => response.json())
+  .then(data => data)
+};
 
 // Comments
 export const getCommentsByPost = (id) => {
