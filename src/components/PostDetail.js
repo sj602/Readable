@@ -17,7 +17,7 @@ class PostDetail extends Component {
   }
 
   render() {
-    const { post } = this.props.posts;
+    const { post } = this.props;
     // console.log(this.props.posts.post)
     return (
       <div className='container'>
@@ -40,8 +40,7 @@ class PostDetail extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.posts,
-    post: state.post
+    post: state.posts.selectPost
   }
 };
 
