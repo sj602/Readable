@@ -1,19 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import '../styles/posts.css';
 import Header from './header';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
-import { editPost } from '../actions/posts';
+import {
+  editPost, getPost
+} from '../actions/posts';
 
 class PostEdit extends Component {
   state = {
+    // id: post.id,
+    // author: post.author,
+    // category: post.category,
+    // title: post.title,
+    // body: post.body,
+    // timestamp: post.timestamp,
     id: '',
     author: '',
     category: '',
     title: '',
     body: '',
-    timestamp: Date.now(),
+    timestamp: '',
+  }
+
+  componentWillMount() {
+    // const { pathname } = this.props.location
+    // const id = pathname.slice(6, pathname.length);
+    const { id } = this.props.match.params;
+    this.props.getPost(id);
+    console.log(this.props)
+
   }
 
   handleChange(e) {
@@ -28,7 +45,31 @@ class PostEdit extends Component {
 
   }
 
+  validate() {
+    let msg = '';
+    if(this.state.author === '') {
+      msg = msg + 'Author is required.\n';
+    }
+    if(this.state.title === '') {
+      msg = msg +'Title is required.\n';
+    }
+    if(this.state.body === '') {
+      msg = msg +'Body is required.\n';
+    }
+    if(this.state.category === '') {
+      msg = msg +'Category is required.\n'
+    }
+
+    if(msg === '') {
+      return ;
+    }
+    return alert(msg);
+  }
+
+
   handleEdit() {
+    this.validate();
+
     const postData = this.state;
 
     this.props.editPost(postData)
@@ -36,9 +77,10 @@ class PostEdit extends Component {
   }
 
   render() {
-    const { post } = this.props.match.params;
+    const { post } = this.props;
     const { categories } = this.props;
 
+    if(post) {
      return (
        <div className='container'>
           <div className='new-post'>
@@ -49,12 +91,7 @@ class PostEdit extends Component {
                 <Input
                   type="select" name="category"
                   value={this.state.category}
-                  onChange={(e) => {
-                    if(e.target.value === 'Select'){
-                      return alert('Select a category')
-                    }
-                    this.handleChange(e)
-                  }}>
+                  onChange={(e) => this.handleChange(e)}>
                   <option defaultValue>
                     Select
                   </option>
@@ -70,6 +107,7 @@ class PostEdit extends Component {
               <FormGroup>
                 <Label>Author</Label>
                 <Input
+                  defaultValue={post.author}
                   type="text" name="author" value={this.state.author}
                   onChange={(e) => this.handleChange(e)} required/>
               </FormGroup>
@@ -91,12 +129,16 @@ class PostEdit extends Component {
         </div>
     )
   }
+  }
 }
 
 const mapStateToProps = (state) => {
   return {
-    categories: state.categories.categories
+    categories: state.categories.categories,
+    post: state.posts.post
   }
 };
 
-export default connect(mapStateToProps, {editPost})(PostEdit);
+export default withRouter(connect(mapStateToProps, {
+  editPost, getPost
+})(PostEdit));

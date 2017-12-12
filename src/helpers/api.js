@@ -68,11 +68,16 @@ export const getPost = (id) => {
 };
 
 export const editPost = (post) => {
+  const postData = {
+    ...post,
+    timestamp: Date.now()
+  }
+
   return fetch(
     `${url}/posts/${post.id}`,
     {
       method: 'PUT',
-      body: JSON.stringify(post),
+      body: JSON.stringify(postData),
       headers
     }
   )

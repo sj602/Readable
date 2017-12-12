@@ -23,26 +23,27 @@ export default function posts(state = {}, action) {
       }
 
     case GET_POST:
+      // console.log(action.post)
       return {
         ...state,
-        post: action.post
+        selectPost: action.post
       }
 
     case EDIT_POST:
-      const postArray = {
-
-      }
+      const index = state.posts.indexOf(action.post);
 
       return {
         ...state,
-        posts: state.posts.concat
+        posts: Object.assign(state.posts[index], action.post)
       }
 
-    // case DELETE_POST:
-    //   return {
-    //     ...state,
-    //     posts: s
-    //   }
+    case DELETE_POST:
+      const i = state.posts.indexOf(action.post);
+
+      return {
+        ...state,
+        posts: state.posts.splice(i, 1)
+      }
 
     default:
       return state

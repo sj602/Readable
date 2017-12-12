@@ -1,30 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  fetchPosts
+  fetchPosts, deletePost, editPost
 } from '../actions/posts';
 import '../styles/posts.css';
 import { Link } from 'react-router-dom';
 import Vote from './vote';
+import PostSub from './PostSub';
 import { Button, ListGroup, ListGroupItem } from 'reactstrap';
 
 class Posts extends Component {
   state = {
+    posts: [],
     sort: false,
   }
 
   componentWillMount() {
     this.props.fetchPosts()
       .then(data => data.posts)
+      .then(data => {
+        this.setState({ posts: data })
+      })
   }
 
-  // deletePost() {
-  //   this.props.deletePost()
-  // }
-
   renderPosts() {
-    const { posts } = this.props.posts
-    console.log(posts);
+    const { posts } = this.state
+
     if(posts === []) {
       return (
           <p>There are no posts yet.</p>
@@ -39,16 +40,7 @@ class Posts extends Component {
               <h3>{post.title}</h3>
             </Link>
             <h5> by {post.author}</h5>
-            <div className='sub-content'>
-              <h6>Comments: {post.commentCount} <Vote value={post} /></h6>
-              <div>
-                <div>
-                  <Link to={`/edit/${post.id}`} params={{ post }}><Button>Edit</Button></Link>
-                </div>{'  '}
-                <div>
-                </div>
-              </div>
-            </div>
+            <PostSub post={post} />
           </ListGroupItem>
         )
       })
@@ -120,5 +112,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  fetchPosts,
+  fetchPosts, deletePost, editPost
 })(Posts);

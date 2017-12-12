@@ -14,9 +14,10 @@ export default class App extends Component {
         <Switch>
           <Route exact path='/' component={Main} />
           <Route exact path='/new' component={NewPost} />
+          <Route exact path='/edit/:id' component={PostEdit} />
+
           <Route exact path='/:category/' component={Main} />
           <Route exact path='/:category/:id' component={PostDetail} />
-          <Route exact path='/edit/:id' component={PostEdit} />
 
         </Switch>
       </div>

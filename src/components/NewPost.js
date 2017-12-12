@@ -19,39 +19,31 @@ class NewPost extends Component {
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value })
-      // id: event.target.value,
-      // author: event.target.value,
-      // category: event.target.value,
-      // title: event.target.value,
-      // body: event.target.value,
-      // timestamp: Date.now()
-    // })
-
   }
 
-  // validate() {
-  //   let msg = {};
-  //   if(this.state.author === '') {
-  //     msg.concat({'author required.'})
-  //   }
-  //   if(this.state.title === '') {
-  //     msg.concat({'title required.'})
-  //   }
-  //   if(this.state.body === '') {
-  //     msg.concat({'body required.'})
-  //   }
-  //   if(this.state.category === '') {
-  //     msg.concat({'category required.'})
-  //   }
-  //
-  //   if(msg === {}) {
-  //     return ;
-  //   }
-  //   return alert(msg);
-  // }
+  validate() {
+    let msg = '';
+    if(this.state.author === '') {
+      msg = msg + 'Author is required.\n';
+    }
+    if(this.state.title === '') {
+      msg = msg +'Title is required.\n';
+    }
+    if(this.state.body === '') {
+      msg = msg +'Body is required.\n';
+    }
+    if(this.state.category === '') {
+      msg = msg +'Category is required.\n'
+    }
+
+    if(msg === '') {
+      return ;
+    }
+    return alert(msg);
+  }
 
   handleAdd() {
-    // this.validate();
+    this.validate();
     const postData = this.state;
 
     this.props.addPost(postData)

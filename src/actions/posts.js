@@ -73,6 +73,6 @@ export const deletePostAction = (post) => {
 }
 
 export const deletePost = (post) => (dispatch) => {
-  return api.deletePost(post.id)
+  return api.deletePost(post)
     .then(post => dispatch(deletePostAction(post)))
 }
