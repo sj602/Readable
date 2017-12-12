@@ -9,37 +9,70 @@ import { Link } from 'react-router-dom';
 import {
   Card, CardBody,
   CardText, CardTitle,
-  CardSubtitle, CardFooter
+  CardSubtitle, CardFooter,
+  Form, FormGroup, Input,
+  Label, Button,
 } from 'reactstrap';
 
 class PostDetail extends Component {
+  state = {
+    author: '',
+    body: '',
+  }
+
   componentWillMount() {
     const { id } = this.props.match.params;
     this.props.getPost(id);
     this.props.getCommentsByPost(id);
   }
 
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  handleAdd() {
+
+  }
+
   render() {
-    const { selectPost } = this.props.posts;
+    const { post } = this.props;
     const { comments } = this.props.comments;
 
     return (
       <div className='container'>
         <Header />
-        { selectPost && (
+
+        { post && (
           <Card>
             <CardBody>
-              <CardTitle>{selectPost.title}</CardTitle>
-              <CardSubtitle>written by {selectPost.author}</CardSubtitle>
-              <CardText style={{marginTop: '30px'}}>{selectPost.body}</CardText>
+              <CardTitle>{post.title}</CardTitle>
+              <CardSubtitle>written by {post.author}</CardSubtitle>
+              <CardText style={{marginTop: '30px'}}>{post.body}</CardText>
             </CardBody>
+
+            <Form>
+              <FormGroup>
+                <Label>Author</Label>
+                <Input
+                type="text" name="author" value={this.state.author}
+                onChange={(e) => this.handleChange(e)} required/>
+              </FormGroup>
+              <FormGroup>
+                <Label>Comment</Label>
+                <Input type="textarea" name="body"
+                style={{height: '80px'}} value={this.state.body}
+                onChange={(e) => this.handleChange(e)} required/>
+              </FormGroup>
+              <Button onClick={() => this.handleAdd()}>Add a Comment</Button>
+            </Form>
+
             { comments && comments.map(comment => {
                 return (
                   <CardFooter className='comments' key={comment.id}>
                     <div>
                       {comment.author}
                     </div>
-                    <div>
+                    <div style={{marginTop: '15px'}}>
                       {comment.body}
                     </div>
                     <div>
@@ -59,7 +92,7 @@ class PostDetail extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.posts,
+    post: state.posts.selectPost,
     comments: state.comments
   }
 };

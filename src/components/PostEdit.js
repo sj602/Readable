@@ -29,8 +29,10 @@ class PostEdit extends Component {
     // const id = pathname.slice(6, pathname.length);
     const { id } = this.props.match.params;
     this.props.getPost(id);
-    console.log(this.props)
+  }
 
+  componentWillReceiveProps({post}) {
+    this.setState({...post});
   }
 
   handleChange(e) {
@@ -77,16 +79,14 @@ class PostEdit extends Component {
   }
 
   render() {
-    const { post } = this.props;
-    const { categories } = this.props;
+    const { categories, post } = this.props;
 
-    if(post) {
      return (
        <div className='container'>
           <div className='new-post'>
             <Header />
             <Form>
-              <FormGroup>
+              {categories.length && (<FormGroup>
                 <Label>Select Category</Label>
                 <Input
                   type="select" name="category"
@@ -103,11 +103,10 @@ class PostEdit extends Component {
                   )
                 })}
                 </Input>
-              </FormGroup>
+              </FormGroup>)}
               <FormGroup>
                 <Label>Author</Label>
                 <Input
-                  defaultValue={post.author}
                   type="text" name="author" value={this.state.author}
                   onChange={(e) => this.handleChange(e)} required/>
               </FormGroup>
@@ -129,13 +128,12 @@ class PostEdit extends Component {
         </div>
     )
   }
-  }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({posts, categories}) => {
   return {
-    categories: state.categories.categories,
-    post: state.posts.post
+    categories,
+    post: posts.selectPost
   }
 };
 
