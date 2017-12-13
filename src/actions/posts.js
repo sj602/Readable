@@ -56,13 +56,13 @@ export const getPost = (id) => (dispatch) => {
 export const editPostAction = (post) => {
   return {
     type: EDIT_POST,
-    post
+    post,
   }
 }
 
 export const editPost = (post) => (dispatch) => {
-  return api.editPost(post.id)
-    .then(post => dispatch(editPostAction(post)))
+  return api.editPost(post)
+    .then(post => dispatch(getPostAction(post)))
 }
 
 export const deletePostAction = (post) => {

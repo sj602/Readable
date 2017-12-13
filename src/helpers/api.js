@@ -109,6 +109,20 @@ export const getCommentsByPost = (id) => {
   .then(data => data)
 };
 
+export const addComment = (comment) => {
+  return fetch(
+    `${url}/comments`,
+    {
+      method: 'POST',
+      body: JSON.stringify(comment),
+      headers
+    }
+  )
+  .then(response => response.json())
+  .then(data => data)
+};
+
+
 // VOTE
 
 export const vote = (id, option, type) => {

@@ -1,17 +1,22 @@
 import {
-  GET_CATEGORIES,
   GET_COMMENTS_BY_POST,
-  GET_POSTS_BY_CATEGORY,
+  ADD_COMMENT,
 } from '../actions/types';
 
-export default function comments(state = {}, action) {
+export default function comments(state = [], action) {
   switch(action.type) {
     case GET_COMMENTS_BY_POST:
       return {
         ...state,
         comments: action.comments
       }
-      
+
+    case ADD_COMMENT:
+      return {
+        ...state,
+        comments: state.comments.push(action.comment)
+      }
+
     default:
       return state
   }

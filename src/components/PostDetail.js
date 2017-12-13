@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import Header from './header';
 import Vote from './vote';
 import { getPost } from '../actions/posts';
-import { getCommentsByPost } from '../actions/comments';
+import {
+  getCommentsByPost, addComment
+} from '../actions/comments';
 import '../styles/posts.css';
 import { Link } from 'react-router-dom';
 import {
@@ -18,6 +20,7 @@ class PostDetail extends Component {
   state = {
     author: '',
     body: '',
+    parentId: this.props.match.params.id,
   }
 
   componentWillMount() {
@@ -26,12 +29,31 @@ class PostDetail extends Component {
     this.props.getCommentsByPost(id);
   }
 
+  validate() {
+    let msg = '';
+    if(this.state.author === '') {
+      msg = msg + 'Author is required.\n';
+    }
+    if(this.state.body === '') {
+      msg = msg +'Body is required.\n';
+    }
+
+    if(msg === '') {
+      return ;
+    }
+    return alert(msg);
+  }
+
+
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
   handleAdd() {
-
+    this.validate();
+    const comment = this.state;
+    console.log(comment)
+    this.props.addComment(comment);
   }
 
   render() {
@@ -49,8 +71,7 @@ class PostDetail extends Component {
               <CardSubtitle>written by {post.author}</CardSubtitle>
               <CardText style={{marginTop: '30px'}}>{post.body}</CardText>
             </CardBody>
-
-            <Form>
+            <Form className='write-comment'>
               <FormGroup>
                 <Label>Author</Label>
                 <Input
@@ -98,5 +119,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  getPost, getCommentsByPost
+  getPost, getCommentsByPost, addComment,
 })(PostDetail);

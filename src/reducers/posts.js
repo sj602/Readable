@@ -23,7 +23,6 @@ export default function posts(state = {}, action) {
       }
 
     case GET_POST:
-      // console.log(action.post)
       return {
         ...state,
         selectPost: action.post
@@ -31,7 +30,7 @@ export default function posts(state = {}, action) {
 
     case EDIT_POST:
       const index = state.posts.indexOf(action.post);
-
+      console.log(index, action.post)
       return {
         ...state,
         posts: Object.assign(state.posts[index], action.post)

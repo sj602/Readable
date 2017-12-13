@@ -10,12 +10,6 @@ import {
 
 class PostEdit extends Component {
   state = {
-    // id: post.id,
-    // author: post.author,
-    // category: post.category,
-    // title: post.title,
-    // body: post.body,
-    // timestamp: post.timestamp,
     id: '',
     author: '',
     category: '',
@@ -25,8 +19,6 @@ class PostEdit extends Component {
   }
 
   componentWillMount() {
-    // const { pathname } = this.props.location
-    // const id = pathname.slice(6, pathname.length);
     const { id } = this.props.match.params;
     this.props.getPost(id);
   }
@@ -37,14 +29,6 @@ class PostEdit extends Component {
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value })
-      // id: event.target.value,
-      // author: event.target.value,
-      // category: event.target.value,
-      // title: event.target.value,
-      // body: event.target.value,
-      // timestamp: Date.now()
-    // })
-
   }
 
   validate() {
@@ -73,9 +57,10 @@ class PostEdit extends Component {
     this.validate();
 
     const postData = this.state;
+    const { post } = this.props;
 
     this.props.editPost(postData)
-    return this.props.history.push("/");
+    return this.props.history.push(`/${post.category}/${post.id}`);
   }
 
   render() {

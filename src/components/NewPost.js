@@ -67,10 +67,10 @@ class NewPost extends Component {
                   <option defaultValue>
                     Select
                   </option>
-                { categories.map(category => {
+                { categories && Object.keys(categories).map(category => {
                   return (
-                    <option key={category.name} value={category.name}>
-                      {category.name}
+                    <option key={categories[category].name} value={categories[category].name}>
+                      {categories[category].name}
                     </option>
                   )
                 })}
@@ -102,10 +102,6 @@ class NewPost extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    categories: state.categories.categories
-  }
-};
+const mapStateToProps = ({categories}) => ({categories});
 
 export default connect(mapStateToProps, {addPost})(NewPost);

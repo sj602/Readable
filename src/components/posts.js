@@ -15,7 +15,8 @@ class Posts extends Component {
     sort: false,
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    console.log(this.props)
     this.props.fetchPosts()
       .then(data => data.posts)
       .then(data => {
