@@ -25,6 +25,7 @@ class Posts extends Component {
 
   renderPosts() {
     const { posts } = this.state
+    const { category } = this.props;
 
     if(posts === []) {
       return (
@@ -33,6 +34,21 @@ class Posts extends Component {
     }
 
     if(posts) {
+      if(category) {
+          return posts.filter(post => post.category == category)
+            .map((post) => {
+              return (
+                <ListGroupItem key={post.id}>
+                  <Link to={`/${post.category}/${post.id}`} params={{ id: post.id }}>
+                    <h3>{post.title}</h3>
+                  </Link>
+                  <h5> by {post.author}</h5>
+                  <PostSub post={post} />
+                </ListGroupItem>
+              )
+          })
+        }
+
       return posts.map((post) => {
         return (
           <ListGroupItem key={post.id}>

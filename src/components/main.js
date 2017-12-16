@@ -7,10 +7,12 @@ import Posts from './posts';
 
 class Main extends Component {
   render() {
+    const category = this.props.location.pathname.slice(1)
+    
     return (
       <div className='container'>
         <Header />
-        <Posts />
+        <Posts category={category}/>
       </div>
     )
   }
