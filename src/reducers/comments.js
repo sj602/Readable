@@ -6,8 +6,6 @@ import {
 } from '../actions/types';
 
 export default function comments(state = {}, action) {
-  const { comment } = action;
-
   switch(action.type) {
     case GET_COMMENTS_BY_POST:
       return {
@@ -25,7 +23,7 @@ export default function comments(state = {}, action) {
       console.log('state', state)
       return {
         ...state,
-        comments: state.comments.push(comment)
+        comments: state.comments.push(action.comment)
       }
 
     case DELETE_COMMENT:
