@@ -27,12 +27,12 @@ export default function comments(state = {}, action) {
       }
 
     case DELETE_COMMENT:
-    const i = state.comments.indexOf(action.comment);
+      const i = state.comments.indexOf(action.comment);
 
-    return {
-      ...state,
-      comments: state.comments.splice(i, 1)
-    }
+      return {
+        ...state,
+        comments: state.comments.splice(i, 1)
+      }
 
     default:
       return state
