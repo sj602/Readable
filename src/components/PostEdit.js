@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from './header';
-import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import {
@@ -64,7 +63,7 @@ class PostEdit extends Component {
   }
 
   render() {
-    const { categories, post } = this.props;
+    const { categories } = this.props;
 
      return (
        <div className='container'>

@@ -1,10 +1,8 @@
 import {
-  GET_COMMENTS_BY_POST,
   GET_ALL_POSTS,
   GET_POSTS_BY_CATEGORY,
   ADD_POST,
   GET_POST,
-  EDIT_POST,
   DELETE_POST,
 } from './types';
 import * as api from '../helpers/api';

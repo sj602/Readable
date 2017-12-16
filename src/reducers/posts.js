@@ -1,10 +1,7 @@
 import {
-  GET_COMMENTS_BY_POST,
-  GET_POSTS_BY_CATEGORY,
   GET_ALL_POSTS,
   GET_POST,
   ADD_POST,
-  EDIT_POST,
   DELETE_POST,
 } from '../actions/types';
 

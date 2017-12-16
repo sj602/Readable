@@ -122,6 +122,42 @@ export const addComment = (comment) => {
   .then(data => data)
 };
 
+export const deleteComment = (comment) => {
+  return fetch(
+    `${url}/comments/${comment.id}`,
+    {
+      method: 'DELETE',
+      headers
+    }
+  )
+  .then(response => response.json())
+  .then(data => data)
+};
+
+export const editComment = (comment) => {
+  return fetch(
+    `${url}/comments/${comment.id}`,
+    {
+      method: 'PUT',
+      body: JSON.stringify(comment),
+      headers
+    }
+  )
+  .then(response => response.json())
+  .then(data => data)
+};
+
+export const getComment = (id) => {
+  return fetch(
+    `${url}/comments/${id}`,
+    {
+      method: 'GET',
+      headers
+    }
+  )
+  .then(response => response.json())
+  .then(data => data)
+};
 
 // VOTE
 

@@ -4,14 +4,14 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import './index.css';
 import App from './App';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <App title='Readable'/>
     </BrowserRouter>
   </Provider>
   ,document.getElementById('root')

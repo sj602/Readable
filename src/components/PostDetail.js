@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from './header';
-import Vote from './vote';
+import CommentSub from './CommentSub';
 import { getPost } from '../actions/posts';
 import {
   getCommentsByPost, addComment
 } from '../actions/comments';
 import '../styles/posts.css';
-import { Link } from 'react-router-dom';
 import {
   Card, CardBody,
   CardText, CardTitle,
@@ -104,7 +103,7 @@ class PostDetail extends Component {
                       {comment.body}
                     </div>
                     <div>
-                      <Vote value={comment} />
+                      <CommentSub comment={comment} />
                     </div>
                   </CardFooter>
                 )

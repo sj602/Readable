@@ -5,7 +5,6 @@ import {
 } from '../actions/posts';
 import '../styles/posts.css';
 import { Link } from 'react-router-dom';
-import Vote from './vote';
 import PostSub from './PostSub';
 import { Button, ListGroup, ListGroupItem } from 'reactstrap';
 
@@ -35,7 +34,7 @@ class Posts extends Component {
 
     if(posts) {
       if(category) {
-          return posts.filter(post => post.category == category)
+          return posts.filter(post => post.category === category)
             .map((post) => {
               return (
                 <ListGroupItem key={post.id}>

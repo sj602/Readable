@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { fetchCategories } from '../actions/categories';
 import { Link } from 'react-router-dom';
 import '../styles/header.css';
-import { Nav, NavItem } from 'react-bootstrap';
 
 class Header extends Component {
   state = {
