@@ -15,16 +15,20 @@ import {
   Form, FormGroup, Input,
   Label, Button,
 } from 'reactstrap';
+import uuid from 'uuid';
 
 class PostDetail extends Component {
   state = {
     author: '',
     body: '',
     parentId: this.props.match.params.id,
+    id: uuid(),
+    timestamp: Date.now(),
   }
 
   componentWillMount() {
     const { id } = this.props.match.params;
+    console.log('id: ', id)
     this.props.getPost(id);
     this.props.getCommentsByPost(id);
   }
@@ -50,7 +54,9 @@ class PostDetail extends Component {
   }
 
   handleAdd() {
-    this.validate();
+    if(this.state.author === '' || this.state.body === '') {
+      return this.validate()
+    }
     const comment = this.state;
     console.log(comment)
     this.props.addComment(comment);
@@ -59,6 +65,7 @@ class PostDetail extends Component {
   render() {
     const { post } = this.props;
     const { comments } = this.props.comments;
+    console.log('comments: ', comments)
 
     return (
       <div className='container'>

@@ -28,14 +28,6 @@ export default function posts(state = {}, action) {
         selectPost: action.post
       }
 
-    case EDIT_POST:
-      const index = state.posts.indexOf(action.post);
-      console.log(index, action.post)
-      return {
-        ...state,
-        posts: Object.assign(state.posts[index], action.post)
-      }
-
     case DELETE_POST:
       const i = state.posts.indexOf(action.post);
 

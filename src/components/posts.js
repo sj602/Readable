@@ -16,7 +16,6 @@ class Posts extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     this.props.fetchPosts()
       .then(data => data.posts)
       .then(data => {

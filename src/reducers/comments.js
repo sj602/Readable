@@ -3,7 +3,7 @@ import {
   ADD_COMMENT,
 } from '../actions/types';
 
-export default function comments(state = [], action) {
+export default function comments(state = {}, action) {
   switch(action.type) {
     case GET_COMMENTS_BY_POST:
       return {
@@ -12,6 +12,7 @@ export default function comments(state = [], action) {
       }
 
     case ADD_COMMENT:
+      console.log('state', state)
       return {
         ...state,
         comments: state.comments.push(action.comment)

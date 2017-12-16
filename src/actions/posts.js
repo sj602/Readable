@@ -53,13 +53,6 @@ export const getPost = (id) => (dispatch) => {
     .then(post => dispatch(getPostAction(post)))
 }
 
-export const editPostAction = (post) => {
-  return {
-    type: EDIT_POST,
-    post,
-  }
-}
-
 export const editPost = (post) => (dispatch) => {
   return api.editPost(post)
     .then(post => dispatch(getPostAction(post)))
