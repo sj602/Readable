@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './header';
 import Posts from './posts';
+import Footer from './footer';
 
 class Main extends Component {
   render() {
@@ -10,6 +11,7 @@ class Main extends Component {
       <div className='container'>
         <Header />
         <Posts category={category}/>
+        <Footer />
       </div>
     )
   }

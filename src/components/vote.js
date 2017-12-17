@@ -22,11 +22,11 @@ class Vote extends Component {
     }
 
     return (
-      <p>
-        Vote Score: {score}
-        <Button onClick={() => this.vote(value.id, "upVote", type)}><FaThumbsOUp /></Button>
+      <div>
+        Vote Score: {score} {'  '}
+        <Button onClick={() => this.vote(value.id, "upVote", type)}><FaThumbsOUp /></Button>{' '}
         <Button onClick={() => this.vote(value.id, "downVote", type)}><FaThumbsODown /></Button>
-      </p>
+      </div>
     )
   }
 }

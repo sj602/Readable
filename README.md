@@ -39,3 +39,4 @@ node server
 * [Github](https://github.com/)
 * [reactstrap](https://reactstrap.github.io/)
 * [react-router](https://github.com/ReactTraining/react-router)
+* [react-icons](https://gorangajic.github.io/react-icons/index.html)

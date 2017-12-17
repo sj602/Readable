@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from './header';
+import Footer from './footer';
 import CommentSub from './CommentSub';
-import { getPost } from '../actions/posts';
+import Vote from './vote';
+import {
+  getPost, deletePost
+} from '../actions/posts';
 import {
   getCommentsByPost, addComment
 } from '../actions/comments';
@@ -14,7 +18,9 @@ import {
   Form, FormGroup, Input,
   Label, Button,
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import uuid from 'uuid';
+import '../styles/PostDetail.css';
 
 class PostDetail extends Component {
   state = {
@@ -75,8 +81,17 @@ class PostDetail extends Component {
             <CardBody>
               <CardTitle>{post.title}</CardTitle>
               <CardSubtitle>written by {post.author}</CardSubtitle>
-              <CardText style={{marginTop: '30px'}}>{post.body}</CardText>
+              <CardText style={{marginTop: '30px', marginLeft: '15px'}}>{post.body}</CardText>
             </CardBody>
+            <div className='sub-content'>
+              <h6>Comments: {post.commentCount} <Vote value={post} /></h6>
+            </div>
+            <div className='edit-delete'>
+              <Link to={`/edit/${post.id}`}>
+                <Button>Edit</Button>
+              </Link>{'  '}
+                <Button onClick={() => this.props.deletePost(post)}>Delete</Button>{'  '}
+            </div>
             <Form className='write-comment'>
               <FormGroup>
                 <Label>Author</Label>
@@ -99,7 +114,7 @@ class PostDetail extends Component {
                     <div>
                       {comment.author}
                     </div>
-                    <div style={{marginTop: '15px'}}>
+                    <div style={{margin: '15px'}}>
                       {comment.body}
                     </div>
                     <div>
@@ -112,6 +127,7 @@ class PostDetail extends Component {
           </Card>
 
         )}
+        <Footer />
       </div>
     )
   }
@@ -125,5 +141,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  getPost, getCommentsByPost, addComment,
+  getPost, getCommentsByPost, deletePost, addComment,
 })(PostDetail);

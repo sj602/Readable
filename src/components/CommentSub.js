@@ -5,25 +5,20 @@ import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
 import { deleteComment, editComment } from '../actions/comments';
 import Vote from './vote';
+import '../styles/CommentSub.css';
 
 class CommentSub extends Component {
   render() {
     const { comment } = this.props;
 
     return (
-      <div className='sub-content'>
+      <div className='comment-control'>
         <Vote value={comment} />
         <div>
-          <div>
           <Link to={`/edit/comments/${comment.id}`} commentId={comment.id}>
             <Button>Edit</Button>
-          </Link>
-          </div>{'  '}
-          <div>
-            <Button onClick={() => this.props.deleteComment(comment)}>Delete</Button>
-          </div>{'  '}
-          <div>
-          </div>
+          </Link>{'  '}
+            <Button onClick={() => this.props.deleteComment(comment)}>Delete</Button>{'  '}
         </div>
       </div>
     )

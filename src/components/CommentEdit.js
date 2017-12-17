@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from './header';
+import Footer from './footer';
 import CommentSub from './CommentSub';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
@@ -139,6 +140,7 @@ class CommentEdit extends Component {
 
             )}
           </div>
+          <Footer />
         </div>
         )
       }

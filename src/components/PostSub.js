@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
 import { deletePost, editPost } from '../actions/posts';
 import Vote from './vote';
+import '../styles/PostSub.css';
 
 class PostSub extends Component {
   render() {
@@ -14,16 +15,10 @@ class PostSub extends Component {
       <div className='sub-content'>
         <h6>Comments: {post.commentCount} <Vote value={post} /></h6>
         <div>
-          <div>
           <Link to={`/edit/${post.id}`}>
             <Button>Edit</Button>
-          </Link>
-          </div>{'  '}
-          <div>
-            <Button onClick={() => this.props.deletePost(post)}>Delete</Button>
-          </div>{'  '}
-          <div>
-          </div>
+          </Link>{'  '}
+            <Button onClick={() => this.props.deletePost(post)}>Delete</Button>{'  '}
         </div>
       </div>
     )

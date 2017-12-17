@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from './header';
-import '../styles/posts.css';
+import Footer from './footer';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { addPost } from '../actions/posts';
 import uuid from 'uuid';
@@ -96,6 +96,7 @@ class NewPost extends Component {
               <Button onClick={() => this.handleAdd()}>Add a Post</Button>
             </Form>
           </div>
+          <Footer />
         </div>
     )
   }

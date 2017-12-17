@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from './header';
+import Footer from './footer';
 import { withRouter } from 'react-router';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import {
@@ -109,6 +110,7 @@ class PostEdit extends Component {
               <Button onClick={() => this.handleEdit()}>Edit a Post</Button>
             </Form>
           </div>
+          <Footer />
         </div>
     )
   }

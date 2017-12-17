@@ -40,12 +40,15 @@ class Header extends Component {
   render() {
      return (
       <div className='header'>
-          <Link to='/'>
-            ALL
-          </Link>
-          <ul>
-            { this.renderCategories() }
-          </ul>
+        <div className='header-title'>
+          Readable
+        </div>
+        <Link to='/'>
+          ALL
+        </Link>
+        <ul>
+          { this.renderCategories() }
+        </ul>
       </div>
     )
   }
