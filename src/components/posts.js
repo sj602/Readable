@@ -113,8 +113,6 @@ class Posts extends Component {
         <ListGroup>
           { this.renderPosts() }
         </ListGroup>
-        <div className='post-detail'>
-        </div>
       </div>
     )
   }

@@ -9,16 +9,22 @@ import '../styles/PostSub.css';
 
 class PostSub extends Component {
   render() {
-    const { post } = this.props;
-
+    const post = this.props.post;
+    // return console.log(this.props);
     return (
       <div className='sub-content'>
         <h6>Comments: {post.commentCount} <Vote value={post} /></h6>
-        <div>
+        <div className='edit-delete'>
           <Link to={`/edit/${post.id}`}>
             <Button>Edit</Button>
           </Link>{'  '}
-            <Button onClick={() => this.props.deletePost(post)}>Delete</Button>{'  '}
+            <Button onClick={() => {
+                this.props.deletePost(post);
+                return this.props.history.push("/");
+            }}
+            >
+              Delete
+            </Button>{'  '}
         </div>
       </div>
     )

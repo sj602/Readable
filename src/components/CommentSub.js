@@ -15,7 +15,7 @@ class CommentSub extends Component {
       <div className='comment-control'>
         <Vote value={comment} />
         <div>
-          <Link to={`/edit/comments/${comment.id}`} commentId={comment.id}>
+          <Link to={`/edit/comments/${comment.id}`}>
             <Button>Edit</Button>
           </Link>{'  '}
             <Button onClick={() => this.props.deleteComment(comment)}>Delete</Button>{'  '}

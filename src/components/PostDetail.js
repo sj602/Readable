@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from './header';
 import Footer from './footer';
+import PostSub from './PostSub';
 import CommentSub from './CommentSub';
 import Vote from './vote';
 import {
@@ -83,15 +84,7 @@ class PostDetail extends Component {
               <CardSubtitle>written by {post.author}</CardSubtitle>
               <CardText style={{marginTop: '30px', marginLeft: '15px'}}>{post.body}</CardText>
             </CardBody>
-            <div className='sub-content'>
-              <h6>Comments: {post.commentCount} <Vote value={post} /></h6>
-            </div>
-            <div className='edit-delete'>
-              <Link to={`/edit/${post.id}`}>
-                <Button>Edit</Button>
-              </Link>{'  '}
-                <Button onClick={() => this.props.deletePost(post)}>Delete</Button>{'  '}
-            </div>
+            <PostSub post={post}/>
             <Form className='write-comment'>
               <FormGroup>
                 <Label>Author</Label>

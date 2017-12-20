@@ -71,7 +71,7 @@ class PostEdit extends Component {
           <div className='new-post'>
             <Header />
             <Form>
-              {categories.length && (<FormGroup>
+              { categories.length && (<FormGroup>
                 <Label>Select Category</Label>
                 <Input
                   type="select" name="category"

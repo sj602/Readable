@@ -21,6 +21,7 @@ export default function comments(state = {}, action) {
 
     case ADD_COMMENT:
       console.log('state', state)
+      console.log('action.comment', action.comment)
       return {
         ...state,
         comments: state.comments.push(action.comment)

@@ -18,64 +18,64 @@ import {
 } from '../actions/comments';
 
 class CommentEdit extends Component {
-  state = {
-    id: '',
-    author: '',
-    category: '',
-    title: '',
-    body: '',
-    timestamp: '',
-  }
-
-  componentWillReceiveProps({comment}) {
-    this.setState({...comment});
-  }
-
+  // state = {
+  //   id: '',
+  //   author: '',
+  //   category: '',
+  //   title: '',
+  //   body: '',
+  //   timestamp: '',
+  // }
+  //
+  // componentWillReceiveProps({comment}) {
+  //   this.setState({...comment});
+  // }
+  //
   componentWillMount() {
-    const { id } = this.props.match.params;
-    const { commentId } = this.props;
-    this.props.getPost(id);
-    this.props.getComment(commentId);
+    const commentid = this.props.location.pathname.slice(15);
+    this.props.getComment(commentid);
 
   }
-
-  handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value })
-  }
-
-  validate() {
-    let msg = '';
-    if(this.state.author === '') {
-      msg = msg + 'Author is required.\n';
-    }
-    if(this.state.body === '') {
-      msg = msg +'Body is required.\n';
-    }
-
-    if(msg === '') {
-      return ;
-    }
-    return alert(msg);
-  }
-
-
-  handleEdit() {
-    this.validate();
-
-    const commentData = this.state;
-    const { post, comment } = this.props;
-
-    this.props.editComment(commentData)
-    return this.props.history.push(`/${post.category}/${post.id}`);
-  }
-
+  //
+  // handleChange(e) {
+  //   this.setState({ [e.target.name]: e.target.value })
+  // }
+  //
+  // validate() {
+  //   let msg = '';
+  //   if(this.state.author === '') {
+  //     msg = msg + 'Author is required.\n';
+  //   }
+  //   if(this.state.body === '') {
+  //     msg = msg +'Body is required.\n';
+  //   }
+  //
+  //   if(msg === '') {
+  //     return ;
+  //   }
+  //   return alert(msg);
+  // }
+  //
+  //
+  // handleEdit() {
+  //   this.validate();
+  //
+  //   const commentData = this.state;
+  //   const { post, comment } = this.props;
+  //
+  //   this.props.editComment(commentData)
+  //   return this.props.history.push(`/${post.category}/${post.id}`);
+  // }
+  //
   render() {
-    const { categories, post, comments } = this.props;
-    const { commentId } = this.props.match.params;
+    const { post } = this.props;
+    const { comments } = this.props;
+    const commentid = this.props.location.pathname.slice(15);
+    console.log(commentid)
 
      return (
        <div className='container'>
-          <div className='new-comment'>
+          <div className='edit-comment'>
             <Header />
             { post && (
               <Card>
@@ -87,7 +87,7 @@ class CommentEdit extends Component {
 
                 { comments && comments.map(comment => {
 
-                    if(comment.id === commentId) {
+                    if(comment.id === commentid) {
                       return (
                         <div>
                           <Form className='write-comment'>
@@ -136,6 +136,7 @@ class CommentEdit extends Component {
                     )
                 })
               }
+
               </Card>
 
             )}
