@@ -20,19 +20,16 @@ export default function comments(state = {}, action) {
       }
 
     case ADD_COMMENT:
-      console.log('state', state)
-      console.log('action.comment', action.comment)
       return {
         ...state,
-        comments: state.comments.push(action.comment)
+        comments: state.comments.concat(action.comment)
       }
 
     case DELETE_COMMENT:
-      const i = state.comments.indexOf(action.comment);
-
+      console.log(action.comment);
       return {
         ...state,
-        comments: state.comments.splice(i, 1)
+        comments: state.comments.filter(c => c.id != action.comment.id)
       }
 
     default:

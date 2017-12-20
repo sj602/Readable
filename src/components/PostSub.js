@@ -10,7 +10,7 @@ import '../styles/PostSub.css';
 class PostSub extends Component {
   render() {
     const post = this.props.post;
-    // return console.log(this.props);
+
     return (
       <div className='sub-content'>
         <h6>Comments: {post.commentCount} <Vote value={post} /></h6>

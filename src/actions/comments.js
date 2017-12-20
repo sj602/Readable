@@ -33,7 +33,7 @@ export const addComment = (comment) => dispatch => {
 
 export const deleteCommentAction = (comment) => {
   return {
-    type: ADD_COMMENT,
+    type: DELETE_COMMENT,
     comment
   }
 }

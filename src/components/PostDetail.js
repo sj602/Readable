@@ -34,7 +34,6 @@ class PostDetail extends Component {
 
   componentWillMount() {
     const { id } = this.props.match.params;
-    console.log('id: ', id)
     this.props.getPost(id);
     this.props.getCommentsByPost(id);
   }
@@ -65,7 +64,7 @@ class PostDetail extends Component {
     }
     const comment = this.state;
     console.log(comment)
-    this.props.addComment(comment);
+    return this.props.addComment(comment);
   }
 
   render() {
