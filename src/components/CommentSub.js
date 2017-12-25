@@ -10,7 +10,6 @@ import '../styles/CommentSub.css';
 class CommentSub extends Component {
   render() {
     const { comment } = this.props;
-
     return (
       <div className='comment-control'>
         <Vote value={comment} />

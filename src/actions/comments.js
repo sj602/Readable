@@ -45,7 +45,7 @@ export const deleteComment = (comment) => dispatch => {
 
 export const editCommentAction = (comment) => {
   return {
-    type: ADD_COMMENT,
+    type: EDIT_COMMENT,
     comment
   }
 }
@@ -57,7 +57,7 @@ export const editComment = (comment) => dispatch => {
 
 export const getCommentAction = (comment) => {
   return {
-    type: ADD_COMMENT,
+    type: GET_COMMENT,
     comment
   }
 }

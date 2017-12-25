@@ -3,6 +3,7 @@ import {
   ADD_COMMENT,
   DELETE_COMMENT,
   GET_COMMENT,
+  EDIT_COMMENT,
 } from '../actions/types';
 
 export default function comments(state = {}, action) {
@@ -26,10 +27,15 @@ export default function comments(state = {}, action) {
       }
 
     case DELETE_COMMENT:
-      console.log(action.comment);
       return {
         ...state,
         comments: state.comments.filter(c => c.id != action.comment.id)
+      }
+
+    case EDIT_COMMENT:
+      return {
+        ...state,
+        comment: action.comment
       }
 
     default:

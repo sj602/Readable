@@ -18,60 +18,59 @@ import {
 } from '../actions/comments';
 
 class CommentEdit extends Component {
-  // state = {
-  //   id: '',
-  //   author: '',
-  //   category: '',
-  //   title: '',
-  //   body: '',
-  //   timestamp: '',
-  // }
-  //
-  // componentWillReceiveProps({comment}) {
-  //   this.setState({...comment});
-  // }
-  //
+  state = {
+    id: '',
+    author: '',
+    category: '',
+    title: '',
+    body: '',
+    timestamp: '',
+  }
+
+  componentWillReceiveProps({comment}) {
+    this.setState({...comment});
+  }
+
   componentWillMount() {
     const commentid = this.props.location.pathname.slice(15);
     this.props.getComment(commentid);
 
   }
-  //
-  // handleChange(e) {
-  //   this.setState({ [e.target.name]: e.target.value })
-  // }
-  //
-  // validate() {
-  //   let msg = '';
-  //   if(this.state.author === '') {
-  //     msg = msg + 'Author is required.\n';
-  //   }
-  //   if(this.state.body === '') {
-  //     msg = msg +'Body is required.\n';
-  //   }
-  //
-  //   if(msg === '') {
-  //     return ;
-  //   }
-  //   return alert(msg);
-  // }
-  //
-  //
-  // handleEdit() {
-  //   this.validate();
-  //
-  //   const commentData = this.state;
-  //   const { post, comment } = this.props;
-  //
-  //   this.props.editComment(commentData)
-  //   return this.props.history.push(`/${post.category}/${post.id}`);
-  // }
-  //
+
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
+  validate() {
+    let msg = '';
+    if(this.state.author === '') {
+      msg = msg + 'Author is required.\n';
+    }
+    if(this.state.body === '') {
+      msg = msg +'Body is required.\n';
+    }
+
+    if(msg === '') {
+      return ;
+    }
+    return alert(msg);
+  }
+
+
+  handleEdit() {
+    this.validate();
+
+    const commentData = this.state;
+    const { post, comment } = this.props;
+
+    this.props.editComment(commentData)
+    return this.props.history.push(`/${post.category}/${post.id}`);
+  }
+
   render() {
     const { post } = this.props;
-    const { comments } = this.props;
+    const { comments } = this.props.comments;
     const commentid = this.props.location.pathname.slice(15);
-    console.log(commentid)
 
      return (
        <div className='container'>
@@ -87,7 +86,7 @@ class CommentEdit extends Component {
 
                 { comments && comments.map(comment => {
 
-                    if(comment.id === commentid) {
+                    if(comment.id == commentid) {
                       return (
                         <div>
                           <Form className='write-comment'>
@@ -103,7 +102,7 @@ class CommentEdit extends Component {
                               style={{height: '80px'}} value={this.state.body}
                               onChange={(e) => this.handleChange(e)} required/>
                             </FormGroup>
-                            <Button onClick={() => this.handleAdd()}>Edit a Comment</Button>
+                            <Button onClick={() => this.handleEdit()}>Edit a Comment</Button>
                           </Form>
 
                           <CardFooter className='comments' key={comment.id}>
@@ -113,15 +112,13 @@ class CommentEdit extends Component {
                             <div style={{marginTop: '15px'}}>
                               {comment.body}
                             </div>
-                            <div>
-                              <CommentSub value={comment} />
-                            </div>
                           </CardFooter>
                         </div>
                       )
                     }
 
-                    return (
+                    else {
+                      return (
                       <CardFooter className='comments' key={comment.id}>
                         <div>
                           {comment.author}
@@ -129,11 +126,9 @@ class CommentEdit extends Component {
                         <div style={{marginTop: '15px'}}>
                           {comment.body}
                         </div>
-                        <div>
-                          <CommentSub value={comment} />
-                        </div>
                       </CardFooter>
                     )
+                  }
                 })
               }
 
@@ -151,7 +146,8 @@ const mapStateToProps = (state) => {
   return {
     categories: state.categories,
     post: state.posts.selectPost,
-    comments: state.comments
+    comments: state.comments,
+    comment: state.comments.comment
   }
 }
 

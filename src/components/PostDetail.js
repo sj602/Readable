@@ -4,7 +4,6 @@ import Header from './header';
 import Footer from './footer';
 import PostSub from './PostSub';
 import CommentSub from './CommentSub';
-import Vote from './vote';
 import {
   getPost, deletePost
 } from '../actions/posts';
@@ -19,7 +18,6 @@ import {
   Form, FormGroup, Input,
   Label, Button,
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
 import uuid from 'uuid';
 import '../styles/PostDetail.css';
 
@@ -63,14 +61,12 @@ class PostDetail extends Component {
       return this.validate()
     }
     const comment = this.state;
-    console.log(comment)
     return this.props.addComment(comment);
   }
 
   render() {
     const { post } = this.props;
     const { comments } = this.props.comments;
-    console.log('comments: ', comments)
 
     return (
       <div className='container'>
