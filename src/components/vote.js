@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchPosts } from '../actions/posts';
 import { voteDispatch } from '../actions/vote';
 import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up';
 import FaThumbsODown from 'react-icons/lib/fa/thumbs-o-down';
@@ -8,6 +9,7 @@ import { Button } from 'react-bootstrap';
 class Vote extends Component {
   vote(id, option, type) {
     this.props.voteDispatch(id, option, type)
+    this.props.fetchPosts()
   }
 
   render() {
@@ -33,8 +35,9 @@ class Vote extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    vote: state.vote
+    vote: state.vote,
+    posts: state.posts
   }
 };
 
-export default connect(mapStateToProps, {voteDispatch})(Vote);
+export default connect(mapStateToProps, {voteDispatch, fetchPosts})(Vote);

@@ -41,7 +41,9 @@ class Header extends Component {
      return (
       <div className='header'>
         <div className='header-title'>
-          Readable
+          <Link to='/'>
+            Readable
+           </Link>
         </div>
         <Link to='/'>
           ALL

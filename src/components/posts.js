@@ -23,7 +23,7 @@ class Posts extends Component {
   }
 
   renderPosts() {
-    const { posts } = this.state
+    const { posts } = this.state;
     const { category } = this.props;
 
     if(posts === []) {
@@ -63,12 +63,15 @@ class Posts extends Component {
   }
 
   sortPosts(type) {
+    const { posts } = this.props.posts;
+    const { sort } = this.state;
+    
     switch(type){
       case 'time':
-        return this.setState((prevState) => ({
-          posts: prevState.posts.sort((a, b) => {
+        return this.setState({
+          posts: posts.sort((a, b) => {
 
-            if(prevState.sort === false) {
+            if(sort === false) {
               return a.timestamp > b.timestamp;
             }else {
               return a.timestamp < b.timestamp;
@@ -76,14 +79,14 @@ class Posts extends Component {
 
           }),
 
-          sort: !(prevState.sort)
-        }))
+          sort: !sort
+        })
 
       case 'score':
-        return this.setState((prevState) => ({
-          posts: prevState.posts.sort((a, b) => {
+        return this.setState({
+          posts: posts.sort((a, b) => {
 
-            if(prevState.sort === false) {
+            if(sort === false) {
               return a.voteScore < b.voteScore;
             }else {
               return a.voteScore > b.voteScore;
@@ -91,8 +94,9 @@ class Posts extends Component {
 
           }),
 
-          sort: !(prevState.sort)
-        }))
+          sort: !sort
+        })
+
 
       default:
         return ;

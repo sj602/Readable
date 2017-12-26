@@ -72,7 +72,7 @@ class PostDetail extends Component {
       <div className='container'>
         <Header />
 
-        { post && (
+        { post && post.title ? (
           <Card>
             <CardBody>
               <CardTitle>{post.title}</CardTitle>
@@ -114,7 +114,16 @@ class PostDetail extends Component {
           }
           </Card>
 
-        )}
+        ) : (
+          <Card>
+            <CardBody>
+              <CardTitle>
+                This post is deleted.
+              </CardTitle>
+            </CardBody>
+          </Card>
+        )
+      }
         <Footer />
       </div>
     )

@@ -13,6 +13,7 @@ class NewPost extends Component {
     category: '',
     title: '',
     body: '',
+    voteScore: 1,
     timestamp: Date.now(),
   }
 
