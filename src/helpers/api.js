@@ -160,7 +160,6 @@ export const getComment = (id) => {
 };
 
 // VOTE
-
 export const vote = (id, option, type) => {
   const voteData = {id, option};
 

@@ -26,11 +26,9 @@ export default function posts(state = {}, action) {
       }
 
     case DELETE_POST:
-      const i = state.posts.indexOf(action.post);
-
       return {
         ...state,
-        posts: state.posts.splice(i, 1)
+        posts: state.posts.filter(p => p.id !== action.post.id)
       }
 
     default:

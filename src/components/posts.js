@@ -14,7 +14,7 @@ class Posts extends Component {
     sort: false,
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchPosts()
       .then(data => data.posts)
       .then(data => {
@@ -25,12 +25,6 @@ class Posts extends Component {
   renderPosts() {
     const { posts } = this.state;
     const { category } = this.props;
-
-    if(posts === []) {
-      return (
-          <p>There are no posts yet.</p>
-      )
-    }
 
     if(posts) {
       if(category) {
@@ -65,7 +59,7 @@ class Posts extends Component {
   sortPosts(type) {
     const { posts } = this.props.posts;
     const { sort } = this.state;
-    
+
     switch(type){
       case 'time':
         return this.setState({

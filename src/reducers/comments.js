@@ -29,7 +29,7 @@ export default function comments(state = {}, action) {
     case DELETE_COMMENT:
       return {
         ...state,
-        comments: state.comments.filter(c => c.id != action.comment.id)
+        comments: state.comments.filter(c => c.id !== action.comment.id)
       }
 
     case EDIT_COMMENT:

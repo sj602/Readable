@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { withRouter,} from 'react-router';
 import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
-import { deletePost, editPost } from '../actions/posts';
+import {
+  deletePost, editPost, fetchPosts
+} from '../actions/posts';
 import Vote from './vote';
 import '../styles/PostSub.css';
 
@@ -33,8 +35,10 @@ class PostSub extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.posts
+    posts: state.posts,
   }
 }
 
-export default withRouter(connect(mapStateToProps, { deletePost, editPost })(PostSub));
+export default withRouter(connect(mapStateToProps, {
+  deletePost, editPost, fetchPosts,
+})(PostSub));

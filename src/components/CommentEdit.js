@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from './header';
 import Footer from './footer';
-import CommentSub from './CommentSub';
-import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import {
   Form, FormGroup, Label, Input, Button,
@@ -61,7 +59,7 @@ class CommentEdit extends Component {
     this.validate();
 
     const commentData = this.state;
-    const { post, comment } = this.props;
+    const { post } = this.props;
 
     this.props.editComment(commentData)
     return this.props.history.push(`/${post.category}/${post.id}`);
@@ -86,7 +84,7 @@ class CommentEdit extends Component {
 
                 { comments && comments.map(comment => {
 
-                    if(comment.id == commentid) {
+                    if(comment.id === commentid) {
                       return (
                         <div>
                           <Form className='write-comment'>

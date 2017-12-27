@@ -26,14 +26,13 @@ class PostDetail extends Component {
     author: '',
     body: '',
     parentId: this.props.match.params.id,
-    id: uuid(),
-    timestamp: Date.now(),
   }
 
   componentWillMount() {
     const { id } = this.props.match.params;
     this.props.getPost(id);
     this.props.getCommentsByPost(id);
+    console.log('componentWillMount')
   }
 
   validate() {
@@ -60,8 +59,19 @@ class PostDetail extends Component {
     if(this.state.author === '' || this.state.body === '') {
       return this.validate()
     }
+
     const comment = this.state;
-    return this.props.addComment(comment);
+    comment.id = uuid();
+    comment.timestamp = Date.now();
+    this.props.addComment(comment);
+
+    this.inputAuthor.value = '';
+    this.inputBody.value = '';
+    this.setState({ author: '', body: '' });
+
+    const { id } = this.props.match.params;
+    return this.props.getPost(id);
+
   }
 
   render() {
@@ -84,12 +94,15 @@ class PostDetail extends Component {
               <FormGroup>
                 <Label>Author</Label>
                 <Input
+                ref={(node) => this.inputAuthor = node}
                 type="text" name="author" value={this.state.author}
                 onChange={(e) => this.handleChange(e)} required/>
               </FormGroup>
               <FormGroup>
                 <Label>Comment</Label>
-                <Input type="textarea" name="body"
+                <Input
+                ref={(node) => this.inputBody = node}
+                type="textarea" name="body"
                 style={{height: '80px'}} value={this.state.body}
                 onChange={(e) => this.handleChange(e)} required/>
               </FormGroup>
