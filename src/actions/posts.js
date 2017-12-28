@@ -24,7 +24,9 @@ export const getAllPosts = (posts) => {
 
 export const fetchPosts = () => (dispatch) => {
   return api.getAllPosts()
-    .then((posts) => dispatch(getAllPosts(posts)))
+    .then((posts) => {
+      return dispatch(getAllPosts(posts))
+    })
 };
 
 export const addPostAction = (post) => {

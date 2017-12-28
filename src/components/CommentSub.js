@@ -23,8 +23,7 @@ class CommentSub extends Component {
             <Button onClick={() => {
               console.log(comment)
               this.props.deleteComment(comment)
-              console.log('commentsub getpost')
-              return this.props.getPost(comment.parentId)
+              .then(() => this.props.getPost(comment.parentId))
             }}>Delete</Button>{'  '}
         </div>
       </div>

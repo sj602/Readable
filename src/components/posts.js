@@ -5,7 +5,7 @@ import {
 } from '../actions/posts';
 import '../styles/posts.css';
 import { Link } from 'react-router-dom';
-import PostSub from './PostSub';
+import Vote from './vote';
 import { Button, ListGroup, ListGroupItem } from 'reactstrap';
 
 class Posts extends Component {
@@ -14,7 +14,7 @@ class Posts extends Component {
     sort: false,
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchPosts()
       .then(data => data.posts)
       .then(data => {
@@ -36,7 +36,25 @@ class Posts extends Component {
                     <h3>{post.title}</h3>
                   </Link>
                   <h5> by {post.author}</h5>
-                  <PostSub post={post} />
+                  <div className='sub-content'>
+                    <h6>Comments: {post.commentCount} <Vote value={post} /></h6>
+                    <div className='edit-delete'>
+                      <Link to={`/edit/${post.id}`}>
+                        <Button>Edit</Button>
+                      </Link>{'  '}
+                        <Button onClick={() => {
+                            this.props.deletePost(post)
+                            .then(() => {
+                              this.props.fetchPosts()
+                              .then(data => data.posts)
+                              .then(data => this.setState({posts: data}))
+                            })
+                        }}
+                        >
+                          Delete
+                        </Button>{'  '}
+                    </div>
+                  </div>
                 </ListGroupItem>
               )
           })
@@ -49,7 +67,25 @@ class Posts extends Component {
               <h3>{post.title}</h3>
             </Link>
             <h5> by {post.author}</h5>
-            <PostSub post={post} />
+            <div className='sub-content'>
+              <h6>Comments: {post.commentCount} <Vote value={post} /></h6>
+              <div className='edit-delete'>
+                <Link to={`/edit/${post.id}`}>
+                  <Button>Edit</Button>
+                </Link>{'  '}
+                  <Button onClick={() => {
+                      this.props.deletePost(post)
+                      .then(() => {
+                        this.props.fetchPosts()
+                        .then(data => data.posts)
+                        .then(data => this.setState({posts: data}))
+                      })
+                  }}
+                  >
+                    Delete
+                  </Button>{'  '}
+              </div>
+            </div>
           </ListGroupItem>
         )
       })

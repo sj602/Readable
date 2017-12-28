@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from './header';
 import Footer from './footer';
-import PostSub from './PostSub';
+import Vote from './vote';
 import CommentSub from './CommentSub';
+import { Link } from 'react-router-dom';
 import {
   getPost, deletePost
 } from '../actions/posts';
@@ -32,7 +33,6 @@ class PostDetail extends Component {
     const { id } = this.props.match.params;
     this.props.getPost(id);
     this.props.getCommentsByPost(id);
-    console.log('componentWillMount')
   }
 
   validate() {
@@ -89,7 +89,21 @@ class PostDetail extends Component {
               <CardSubtitle>written by {post.author}</CardSubtitle>
               <CardText style={{marginTop: '30px', marginLeft: '15px'}}>{post.body}</CardText>
             </CardBody>
-            <PostSub post={post}/>
+            <div className='sub-content'>
+              <h6>Comments: {post.commentCount} <Vote value={post} /></h6>
+              <div className='edit-delete'>
+                <Link to={`/edit/${post.id}`}>
+                  <Button>Edit</Button>
+                </Link>{'  '}
+                  <Button onClick={() => {
+                      this.props.deletePost(post)
+                      return this.props.history.push('/');
+                      }}
+                  >
+                    Delete
+                  </Button>{'  '}
+              </div>
+            </div>
             <Form className='write-comment'>
               <FormGroup>
                 <Label>Author</Label>
