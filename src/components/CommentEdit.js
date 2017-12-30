@@ -8,12 +8,14 @@ import {
   Card, CardBody, CardTitle, CardSubtitle,
   CardText, CardFooter
 } from 'reactstrap';
-import {
-  editPost, getPost
-} from '../actions/posts';
-import {
-  editComment, deleteComment, getComment
-} from '../actions/comments';
+// import {
+//   editPost, getPost
+// } from '../actions/posts';
+// import {
+//   editComment, deleteComment, getComment
+// } from '../actions/comments';
+import * as actions from '../actions';
+import { bindActionCreators } from 'redux';
 
 class CommentEdit extends Component {
   state = {
@@ -149,6 +151,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, {
-  editPost, getPost, deleteComment, editComment, getComment
-})(CommentEdit));
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(actions, dispatch)
+}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CommentEdit));
